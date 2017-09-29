@@ -5,6 +5,7 @@
 #include<mutex>
 #include<utility>
 #include "Shell.h"
+#include "Client.h"
 
 #pragma comment(lib, "ws2_32.lib")  // load ws2_32.dll
 

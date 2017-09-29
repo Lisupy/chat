@@ -6,6 +6,7 @@
 #include<thread>
 #include<map>
 #include<vector>
+#include<utility>
 
 class Shell{
 protected:
@@ -25,16 +26,17 @@ public:
 	void start();
 
 	friend void start_server(Shell *);
+	friend void recv_client(Peer &clnt, Shell *);
 
 private:
-	std::vector<std::thread> thread_vector; // thread vector
-	std::vector<Peer> peer_vector;          // peer vector
+
+	std::vector<Peer> _clnt_vec;
 
 	std::mutex _screen_mtx;  // mutex for print message on screen
-	std::mutex _peer_mtx;    // mutex for peer vector
+	std::mutex _vec_mtx;    // mutex for peer vector
 
-	std::vector<Peer> _peers;  // peer information
 	std::map<std::string, void (Shell::*)()> fun_mapper;
 	Server *serv;
+	std::thread serv_th;
 };
 
